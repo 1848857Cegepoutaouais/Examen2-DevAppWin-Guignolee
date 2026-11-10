@@ -139,14 +139,24 @@
                             <TextBox
                                 Header="Donateur"
                                 PlaceholderText="Prénom Nom"
-                                Text="" />
+                                Text="{x:Bind ViewModel.NouveauDon.Donateur, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <ItemsView Foreground="Coral" ItemsSource="{x:Bind ViewModel.NouveauDon.GetErrors('Donateur'), Mode=OneWay}">
+                                <ItemsView.Resources>
+                                    <SolidColorBrush x:Key="ItemContainerPointerOverBackground" Color="Transparent" />
+                                </ItemsView.Resources>
+                            </ItemsView>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
                             <TextBox
                                 Header="Contenu du don"
                                 PlaceholderText="Ex. : Conserves de soupe"
-                                Text="" />
+                                Text="{x:Bind ViewModel.NouveauDon.Contenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <ItemsView Foreground="Coral" ItemsSource="{x:Bind ViewModel.NouveauDon.GetErrors('Contenu'), Mode=OneWay}">
+                                <ItemsView.Resources>
+                                    <SolidColorBrush x:Key="ItemContainerPointerOverBackground" Color="Transparent" />
+                                </ItemsView.Resources>
+                            </ItemsView>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2">
@@ -154,7 +164,12 @@
                                 Header="Quantité"
                                 MaxLength="3"
                                 PlaceholderText="Ex. : 24"
-                                Text="" />
+                                Text="{x:Bind ViewModel.NouveauDon.Quantite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <ItemsView Foreground="Coral" ItemsSource="{x:Bind ViewModel.NouveauDon.GetErrors('Quantite'), Mode=OneWay}">
+                                <ItemsView.Resources>
+                                    <SolidColorBrush x:Key="ItemContainerPointerOverBackground" Color="Transparent" />
+                                </ItemsView.Resources>
+                            </ItemsView>
                         </StackPanel>
 
                         <CheckBox
@@ -162,7 +177,8 @@
                             Margin="0,28,0,0"
                             VerticalAlignment="Top"
                             Content="Périssable"
-                            IsChecked="False" />
+                            IsChecked="{x:Bind ViewModel.NouveauDon.EstPerissable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
 
                         <Button
                             Grid.Column="4"

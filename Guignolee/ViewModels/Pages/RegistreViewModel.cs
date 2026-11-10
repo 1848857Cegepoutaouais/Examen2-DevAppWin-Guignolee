@@ -69,9 +69,13 @@ namespace Guignolee.ViewModels.Pages
         /// </summary>
         public void ChargerDonnees()
         {
-            // TODO: À compléter selon la documentation de la méthode.
-
-            DonSelectionne = null;
+            Dons.Clear();
+            foreach (Don don in _donDataProvider.GetDons())
+            {
+                Dons.Add(new DonViewModel(don));
+            }
+            ////////TODO LE SORT EST PAMS OIKFAJMÉ 
+            Dons.Order(DonViewModel.EstPerisable);
         }
 
         /// <summary>

@@ -1,9 +1,10 @@
 ﻿using Guignolee.Models;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Guignolee.ViewModels
 {
-    public class DonViewModel
+    public class DonViewModel : ValidableViewModel
     {
         private readonly Don _don;
 
@@ -14,39 +15,59 @@ namespace Guignolee.ViewModels
 
         public int Id => _don.Id;
 
+        [Required(ErrorMessage = "Obligatoire.")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Entre 2 et 50 caractères.")]
+        [RegularExpression(@"^\d[A-Z][a-z] +$", ErrorMessage = "Que des chiffres, lettres et espaces")]
         public string Donateur
         {
             get { return _don.Donateur; }
             set
             {
-                if (_don.Donateur != value)
+                if (_don.Donateur != value && Validate(value))
                 {
                     _don.Donateur = value;
+                }
+                else
+                {
+                    Validate(value);
                 }
             }
         }
 
+        [Required(ErrorMessage = "Obligatoire.")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Entre 2 et 50 caractères.")]
+        [RegularExpression(@"^\d[A-Z][a-z] +$", ErrorMessage = "Que des chiffres, lettres et espaces")]
         public string Contenu
         {
             get { return _don.Contenu; }
             set
             {
-                if (_don.Contenu != value )
+                if (_don.Contenu != value && Validate(value))
                 {
                     _don.Contenu = value;
+                }
+                else
+                {
+                    Validate(value);
                 }
             }
         }
 
+        [Required(ErrorMessage = "Obligatoire.")]
+        [RegularExpression(@"^\d{1,3}$", ErrorMessage = "1 à 3 chiffres.")]
         public int Quantite
         {
             get { return _don.Quantite; }
             set
             {
-                if (Quantite != value)
+                if (Quantite != value && Validate(value))
                 {
                     _don.Quantite = value;
 
+                }
+                else
+                {
+                    Validate(value);
                 }
             }
         }
@@ -59,6 +80,10 @@ namespace Guignolee.ViewModels
                 if (_don.EstPerissable != value)
                 {
                     _don.EstPerissable = value;
+                }
+                else
+                {
+                    Validate(value);
                 }
             }
         }
